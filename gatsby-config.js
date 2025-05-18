@@ -14,11 +14,6 @@ module.exports = {
       name: `Bogeum Kim`,
       summary: `who lives and works in South Korea interested in AI.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
-    social: {
-      twitter: `kylemathews`,
-    },
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -102,7 +97,7 @@ module.exports = {
               }
             }`,
             output: "/rss.xml",
-            title: "Gatsby Starter Blog RSS Feed",
+            title: "GOLDEV RSS Feed",
           },
         ],
       },
@@ -110,7 +105,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
+        name: `GOLDEV`,
         short_name: `Gatsby`,
         start_url: `/`,
         background_color: `#ffffff`,
