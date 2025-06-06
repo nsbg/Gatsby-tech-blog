@@ -7,7 +7,7 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
 ## Summary
 
 - Automatic prompt engineering 분야에서 일반적으로 쓰이는 feedback-based prompt optimization의 단점을 극복하기 위한 **Exemplar-Guided Reflection with Memory mechanism (ERM)** 제안
-- 다양한 벤치마크 데이터셋으로 실험한 결과, 기존 연구들(GPO, EvoPrompt, ...)보다 최적화 단계는 적으면서 우수한 성능 확인
+- 다양한 벤치마크 데이터셋으로 실험한 결과, ERM이 기존 연구들보다 최적화 단계는 적으면서 우수한 성능 확인
 
 ## Background
 
@@ -33,8 +33,15 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
 ### Component (2) Feedback Memory
 ![Figure 2(b)](./figure_2(b).jpg)
 - Feedback memory storage
+    - 피드백을 바탕으로 생성된 정제 프롬프트를 validation set으로 평가하여 성능이 향상된 경우에만 피드백 저장
+    - BGE-M3 모델을 사용해 새롭게 생성된 피드백과 이전 피드백의 의미적 유사도 계산 → 유사도가 높으면 피드백을 저장하지 않음
 - Feedback retrieval
+    - 최적화가 진행되는 동안 feedback memory storage에서 우선순위 점수가 높은 피드백을 선택
+    - 각 피드백의 점수에 따라 선택 확률이 정해지고 이 확률을 바탕으로 랜덤하게 피드백 선택
 - Feedback forgetting updating
+    - 프롬프트 최적화 모델은 선택된 피드백 그룹을 활용해 새로운 프롬프트 생성
+    - Validation set에서의 성능에 따라 해당 프롬프트 생성에 쓰인 피드백 우선순위 점수 증가 또는 감소
+    - Threshold 아래로 점수가 떨어진 피드백은 storage에서 삭제
 ### Component (3) Exemplar Factory
 ![Figure 2(c)](./figure_2(c).jpg)
 - Exemplar memory storage
