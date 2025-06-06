@@ -188,7 +188,7 @@ ol li {
   margin-bottom: calc(var(--spacing-8) / 2);
 }
 
-ul {
+ul li {
   padding-left: 1.2em;
 }
 
