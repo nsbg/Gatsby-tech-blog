@@ -52,7 +52,7 @@
   --fontSize-5: 2.074rem;
   --fontSize-6: 2.488rem;
   --fontSize-7: 2.986rem;
-  --color-primary: #005b99;
+  /* --color-primary: #005b99; */
   --color-text: #2e353f;
   --color-text-light: #4f5969;
   --color-heading: #1a202c;
@@ -167,7 +167,8 @@ p {
 }
 
 p[itemProp="description"] {
-  text-align: justify;
+  /* 포스팅 미리보기 양쪽 정렬 */
+  text-align: justify; 
 }
 
 ul,
