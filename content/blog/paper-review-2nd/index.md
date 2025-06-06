@@ -25,9 +25,9 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
 ![Figure 2](./figure_2.jpg)
 
 ### Component (1) Exemplar-Guided Reflection
-<img src="./figure_2(a).jpg" width="450" height="600">
+<img src="./figure_2(a).jpg" width="450" height="600"/>
 - 프롬프트 최적화 모델이 더 구체적인 피드백을 생성할 수 있도록 실패 사례를 포함한 메타 프롬프트 전달
-- 프롬프트 최적화 모델은 메타 프롬프트에 주어진 잘못된 결과와 스스로 파악한 예시를 통해 프롬프트 개선점 도출
+- 프롬프트 최적화 모델은 {error_samples}와 스스로 파악한 {exemplar}를 통해 프롬프트 개선점 도출
 
 ### Component (2) Feedback Memory
 ![Figure 2(b)](./figure_2(b).jpg)
@@ -41,7 +41,22 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
 - Exemplar forgetting updating
 
 ## Experiments
+- 7개 데이터셋에 대해 F1 score, Rouge-L, Accuracy 측정
+    - F1 score: LIAR, BBH, ETHOS, ArSarcasm
+    - Rouge-L: WebNLG
+    - Accuracy: GSM8K, WSC
 
+## Result
+- Comparisons of our method with existing LLM-based prompt optimizers **under zero-shot setting**
+![Table 1](./table_1.jpg)
+- Comparisons of our method with existing LLM-based prompt optimizers **under few-shot setting**
+![Table 3](./table_3.jpg)
+- Prompts optimized by different methods on the WebNLG dataset
+![Table 2](./table_2.jpg)
+- The efficiency of ERM
+    - The size of the circles: 성능
+    ![Figure 3](./figure_3.jpg)
+    
 ## Limitations
 - 최적화 과정 중에도 일부 질문에 대해 계속해서 잘못된 답변이 나올 수 있음
 - 최적의 프롬프트가 항상 인간의 기대와 일치하는 것은 아님
