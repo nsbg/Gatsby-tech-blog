@@ -97,7 +97,7 @@ module.exports = {
               }
             }`,
             output: "/rss.xml",
-            title: "GOLDEV RSS Feed",
+            title: "gold vibes only RSS Feed",
           },
         ],
       },
@@ -105,7 +105,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `GOLDEV`,
+        name: `gold vibes only`,
         short_name: `Gatsby`,
         start_url: `/`,
         background_color: `#ffffff`,
