@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@fontsource-variable/montserrat": "^5.0.17",
+    "@fontsource/ibm-plex-sans-kr": "^5.2.5",
     "@fontsource/merriweather": "^5.0.8",
     "@fontsource/permanent-marker": "^5.2.5",
     "gatsby": "^5.14.3",
