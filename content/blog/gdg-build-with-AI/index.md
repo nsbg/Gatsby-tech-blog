@@ -1,3 +1,9 @@
+---
+title: Build with AI 2025 Seoul
+date: "2025-05-24T12:00:00.000+09:00"
+description: This is a custom description for SEO and Open Graph purposes, rather than the default generated excerpt. Simply add a description field to the frontmatter.
+---
+
 Q. 기존 레거시 시스템 연동을 어떻게 잡을 수 있을까?
 
 Q. LLM 예산
