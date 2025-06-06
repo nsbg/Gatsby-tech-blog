@@ -32,7 +32,7 @@
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
   --fontFamily-serif: "Merriweather", "Georgia", Cambria, "Times New Roman",
-    Times, serif, 'Permanent Marker', cursive;
+    Times, serif, 'Permanent Marker', cursive, 'IBM Plex Sans KR', sans-serif;
   --font-body: var(--fontFamily-serif);
   --font-heading: var(--fontFamily-sans);
   --fontWeight-normal: 400;
@@ -76,7 +76,8 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
+  /* font-family: var(--font-body); */
+  font-family: 'IBM Plex Sans KR', sans-serif;
   font-size: var(--fontSize-1);
   color: var(--color-text);
 }
@@ -239,7 +240,7 @@ a:focus {
 /* Custom classes */
 
 .global-wrapper {
-  margin: var(--spacing-5) auto;
+  /* margin: var(--spacing-0) auto; */
   max-width: var(--maxWidth-wrapper);
   padding: var(--spacing-10) var(--spacing-5);
 }
