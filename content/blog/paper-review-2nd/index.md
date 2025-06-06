@@ -26,12 +26,19 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
 
 ### Component (1) Exemplar-Guided Reflection
 ![Figure 2(a)](./figure_2(a).jpg)
-- 프롬프트 최적화 모델이 더 구체적인 피드백을 생성할 수 있도록 실패 사례 중 대표적인 예시와 상세한 풀이 과정 활용
-- 메타 프롬프트에 주어진 잘못된 결과와 모델이 파악한 예시를 통해 프롬프트 개선점 도출
+- 프롬프트 최적화 모델이 더 구체적인 피드백을 생성할 수 있도록 실패 사례를 포함한 메타 프롬프트 전달
+- 프롬프트 최적화 모델은 메타 프롬프트에 주어진 잘못된 결과와 스스로 파악한 예시를 통해 프롬프트 개선점 도출
 
 ### Component (2) Feedback Memory
-
+![Figure 2(b)](./figure_2(b).jpg)
+- Feedback memory storage
+- Feedback retrieval
+- Feedback forgetting updating
 ### Component (3) Exemplar Factory
+![Figure 2(c)](./figure_2(c).jpg)
+- Exemplar memory storage
+- Exemplar retrieval
+- Exemplar forgetting updating
 
 ## Experiments
 
