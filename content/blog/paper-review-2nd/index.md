@@ -25,8 +25,8 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
 ![Figure 2](./figure_2.jpg)
 
 ### Component (1) Exemplar-Guided Reflection
-- Instructive meta-prompt를 사용해 prompt optimizer가 typical wrong samples를 식별하고, 각 샘플에 대해 상세한 풀이 과정을 제공하는 exemplar를 생성하도록 안내하는 단계
-    - Prompt optimizer는 개선된 프롬프트를 생성하는 역할의 언어 모델을 의미함
+- 프롬프트 최적화 모델이 더 구체적인 피드백을 생성할 수 있도록 실패 사례 중 대표적인 예시와 상세한 풀이 과정 활용
+![Figure 2(a)](./figure_2(a).jpg)
 ### Component (2) Feedback Memory
 
 ### Component (3) Exemplar Factory
