@@ -9,7 +9,7 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Gold vibes only`,
+    title: `gold vibes only`,
     author: {
       name: `Bogeum Kim`,
       summary: `who lives and works in South Korea interested in AI.`,
