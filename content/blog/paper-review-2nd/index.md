@@ -7,17 +7,20 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
 ## Summary
 
 - Automatic prompt engineering 분야에서 일반적으로 쓰이는 feedback-based prompt optimization의 단점을 극복하기 위한 **Exemplar-Guided Reflection with Memory mechanism (ERM)** 제안
+    - Evolutionary-based methods, trajectory-based methods,  feedback-based methods 중 feedback-based methods 개선에 초점을 맞춘 연구
 - 다양한 벤치마크 데이터셋으로 실험한 결과, ERM이 기존 연구들보다 최적화 단계는 적으면서 우수한 성능 확인
 
-## Background
+## Feedback-based prompt optimization
 
-- Feedback-based prompt optimization은 실패 사례에서 생성된 피드백을 활용해 프롬프트를 최적화하는 것
-  - '실패 사례'는 사용자가 원하는 결과를 출력하지 못한 프롬프트
-- Feedback-based prompt optimization 단계 (<u>section 3.1</u>)
-    - Step 1. prompt initialization: manual 또는 induction(이 논문에서는 manual 방식 사용)
+- 개념
+    - 실패 사례(사용자가 원하는 결과를 출력하지 못한 프롬프트)에서 생성된 피드백을 활용해 프롬프트를 최적화하는 것
+- 예시
+![meta prompting](./figure_ref.jpg)
+- 동작 과정 (<u>section 3.1</u>)
+    - Step 1. prompt initialization: manual 또는 induction
     - Step 2. new prompt proposal: 태스크 모델이 출력한 오답을 바탕으로 프롬프트 최적화 모델이 피드백 및 개선된 프롬프트 생성
     - Step 3. prompt search: 여러 개의 후보 프롬프트 중 validation set에서의 성능이 좋은 k개 프롬프트 선정
-- Feedback-based prompt optimization의 단점
+- 단점
     - 현재 선택되지 않은 피드백이나 이전에 생성된 피드백은 버려질 수 있음 → 과거에 실패했던 사례에서 얻은 피드백이 현재의 프롬프트 개선에 적용될 수 있더라도 이를 활용하지 못하게 됨
     - 예시의 '실제 효과'를 평가하지 않고 단순히 의미가 비슷한 예시를 추가하기 때문에 사용된 예시가 최적이 아닐수도 있음
 
