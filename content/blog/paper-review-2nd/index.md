@@ -12,7 +12,7 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
 ## Background
 
 - Feedback-based prompt optimization은 실패 사례에서 생성된 피드백을 활용해 프롬프트를 최적화하는 것
-    - '실패 사례'는 사용자가 원하는 결과를 출력하지 못한 프롬프트
+  - '실패 사례'는 사용자가 원하는 결과를 출력하지 못한 프롬프트
 - Feedback-based prompt optimization 단계 (<u>section 3.1</u>)
     1) Prompt initialization: manual 또는 induction(이 논문에서는 manual 방식 사용)
     2) New prompt proposal: 태스크 모델이 출력한 오답을 바탕으로 프롬프트 최적화 모델이 피드백 및 개선된 프롬프트 생성
