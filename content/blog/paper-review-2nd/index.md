@@ -57,10 +57,10 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
     - 새로운 예시가 기존 예시와 동일할 경우 일정한 확률 `p`로 기존 예시를 교체하거나 `1-p`의 확률로 예시를 저장하지 않음
 - Exemplar retrieval
     - 최적화 단계
-        - `우선순위 점수*의미적 유사도 점수`와 softmax 함수를 활용해 각 예시가 선택될 확률 계산
+        - <u>우선순위 점수*의미적 유사도 점수</u>와 softmax 함수를 활용해 각 예시가 선택될 확률 계산
         - 확률을 기반으로 랜덤하게 예시 5개 선택
     - 추론 단계
-        - `우선순위 점수*의미적 유사도 점수`가 높은 순으로 예시 5개 선택
+        - <u>우선순위 점수*의미적 유사도 점수</u>가 높은 순으로 예시 5개 선택
         - 선택된 예시들을 최종 프롬프트에 추가
 - Exemplar forgetting updating
     - Feedback forgetting updating과 동일한 역할
