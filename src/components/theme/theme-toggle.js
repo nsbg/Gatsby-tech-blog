@@ -33,7 +33,7 @@ const ThemeToggle = () => {
       aria-label="다크모드 토글"
       type="button"
     >
-      {darkMode ? "🌙 다크모드" : "☀️ 라이트모드"}
+      {darkMode ? "🌙" : "☀️"}
     </button>
   )
 }
