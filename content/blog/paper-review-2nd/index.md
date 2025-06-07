@@ -17,9 +17,12 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
 - 예시
 ![meta prompting](./figure_ref.jpg)
 - 동작 과정 (<u>section 3.1</u>)
-    - Step 1. prompt initialization: manual 또는 induction
-    - Step 2. new prompt proposal: 태스크 모델이 출력한 오답을 바탕으로 프롬프트 최적화 모델이 피드백 및 개선된 프롬프트 생성
-    - Step 3. prompt search: 여러 개의 후보 프롬프트 중 validation set에서의 성능이 좋은 k개 프롬프트 선정
+    - Step 1. prompt initialization
+        - manual 또는 induction
+    - Step 2. new prompt proposal
+        - 태스크 모델이 출력한 오답을 바탕으로 프롬프트 최적화 모델이 피드백 및 개선된 프롬프트 생성
+    - Step 3. prompt search
+        - Beam search를 통해 여러 개의 후보 프롬프트 중 validation set에서의 성능이 좋은 k개 프롬프트 선정
 - 단점
     - 현재 선택되지 않은 피드백이나 이전에 생성된 피드백은 버려질 수 있음
         - 과거에 실패했던 사례에서 얻은 피드백이 현재의 프롬프트 개선에 적용될 수 있더라도 이를 활용하지 못하게 됨
@@ -38,7 +41,7 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
 ### Component (2) Feedback Memory
 ![Figure 2(b)](./figure_2(b).jpg)
 - Feedback memory storage
-    - 피드백을 바탕으로 생성된 정제 프롬프트를 validation set으로 평가하여 성능이 향상된 경우에만 피드백 저장
+    - 피드백을 바탕으로 개선된 프롬프트를 validation set으로 평가하여 성능이 향상된 경우에만 피드백 저장
     - BGE-M3 모델을 사용해 새롭게 생성된 피드백과 이전 피드백의 의미적 유사도 계산 → 유사도가 높으면 피드백을 저장하지 않음
 - Feedback retrieval
     - 최적화가 진행되는 동안 feedback memory storage에서 우선순위 점수가 높은 피드백을 선택
@@ -53,7 +56,14 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
     - 프롬프트 최적화 모델이 생성한 예시의 상세 풀이 과정이 실제 정답과 일치하는지 확인
     - 새로운 예시가 기존 예시와 동일할 경우 일정한 확률 `p`로 기존 예시를 교체하거나 `1-p`의 확률로 예시를 저장하지 않음
 - Exemplar retrieval
+    - 최적화 단계
+        - `우선순위 점수*의미적 유사도 점수`와 softmax 함수를 활용해 각 예시가 선택될 확률 계산
+        - 확률을 기반으로 랜덤하게 예시 5개 선택
+    - 추론 단계
+        - `우선순위 점수*의미적 유사도 점수`가 높은 순으로 예시 5개 선택
+        - 선택된 예시들을 최종 프롬프트에 추가
 - Exemplar forgetting updating
+    - Feedback forgetting updating과 동일한 역할
 
 ## Experiments
 - 7개 데이터셋에 대해 F1 score, Rouge-L, Accuracy 측정
