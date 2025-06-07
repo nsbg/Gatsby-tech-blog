@@ -12,7 +12,7 @@ module.exports = {
     title: `gold vibes only`,
     author: {
       name: `Bogeum Kim`,
-      summary: `who lives and works in South Korea interested in AI.`,
+      summary: ``,
     },
   },
   plugins: [
