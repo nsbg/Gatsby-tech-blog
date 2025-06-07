@@ -8,7 +8,7 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
 
 - Automatic prompt engineering 분야에서 일반적으로 쓰이는 feedback-based prompt optimization의 단점을 극복하기 위한 **Exemplar-Guided Reflection with Memory mechanism (ERM)** 제안
     - Evolutionary-based methods, trajectory-based methods,  feedback-based methods 중 feedback-based methods 개선에 초점을 맞춘 연구
-- 다양한 벤치마크 데이터셋으로 실험한 결과, ERM이 기존 연구들보다 최적화 단계는 적으면서 우수한 성능 확인
+- 다양한 데이터셋으로 실험한 결과, ERM이 기존 연구들보다 최적화 단계는 적으면서 우수한 성능 확인
 
 ## Feedback-based prompt optimization
 
@@ -21,16 +21,19 @@ description: A paper proposes an Exemplar-Guided Reflection with Memory (ERM) me
     - Step 2. new prompt proposal: 태스크 모델이 출력한 오답을 바탕으로 프롬프트 최적화 모델이 피드백 및 개선된 프롬프트 생성
     - Step 3. prompt search: 여러 개의 후보 프롬프트 중 validation set에서의 성능이 좋은 k개 프롬프트 선정
 - 단점
-    - 현재 선택되지 않은 피드백이나 이전에 생성된 피드백은 버려질 수 있음 → 과거에 실패했던 사례에서 얻은 피드백이 현재의 프롬프트 개선에 적용될 수 있더라도 이를 활용하지 못하게 됨
+    - 현재 선택되지 않은 피드백이나 이전에 생성된 피드백은 버려질 수 있음
+        - 과거에 실패했던 사례에서 얻은 피드백이 현재의 프롬프트 개선에 적용될 수 있더라도 이를 활용하지 못하게 됨
     - 예시의 '실제 효과'를 평가하지 않고 단순히 의미가 비슷한 예시를 추가하기 때문에 사용된 예시가 최적이 아닐수도 있음
 
-## Method
+## ERM pipeline
 ![Figure 2](./figure_2.jpg)
 
 ### Component (1) Exemplar-Guided Reflection
 ![Figure 2(a)](./figure_2(a).jpg)
-- 프롬프트 최적화 모델이 더 구체적인 피드백을 생성할 수 있도록 실패 사례를 포함한 메타 프롬프트 전달
-- 프롬프트 최적화 모델은 {error_samples}와 스스로 파악한 {exemplar}를 통해 프롬프트 개선점 도출
+- Instructive meta prompt
+    - 기존 meta prompt와의 차이점: LLM이 예시를 선택하도록 유도하여 더 풍부한 피드백을 생성할 수 있게 함
+- 프롬프트 최적화 모델이 더 구체적인 피드백을 생성할 수 있도록 실패 사례를 포함한 meta prompt 전달
+- 프롬프트 최적화 모델은 **{error_samples}**와 스스로 파악한 **{exemplar}**를 통해 프롬프트 개선점 도출
 
 ### Component (2) Feedback Memory
 ![Figure 2(b)](./figure_2(b).jpg)
