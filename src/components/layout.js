@@ -41,7 +41,7 @@ const Layout = ({ location, title, children }) => {
         </div>
         </div>
       </header>
-      <main>{children}</main>
+      <main className="global-wrapper">{children}</main>
       <footer>
         © {new Date().getFullYear()}, Built with
         {` `}

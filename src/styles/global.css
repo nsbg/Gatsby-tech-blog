@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+
 body {
   background: #FFFACD;
   color: #18192c;
@@ -9,7 +10,7 @@ body {
   background-image:
     repeating-linear-gradient(
       to bottom,
-      rgba(0,0,0,0.025) 0px, 
+      rgba(0,0,0,0.025) 0px,
       rgba(0,0,0,0.025) 1px,
       transparent 1px,
       transparent 4px
@@ -19,18 +20,38 @@ body {
   background-repeat: repeat, repeat;
 }
 
+
 body.dark-mode {
   background: #000;
   color: #5AFF5A;
 }
+
+
+/* 다크모드에서 타이틀 폰트만 색상 변경 */
+body.dark-mode .main-heading,
+body.dark-mode .main-heading a,
+body.dark-mode .header-link-home {
+  color: #5AFF5A;
+  text-shadow:
+    2px 2px rgb(255, 255, 255)
+    -2px -2px #ffffff,
+    2px -2px #ffffff,
+    -2px 2px #ffffff;
+}
+
+
+body.dark-mode .global-header {
+  background: transparent !important;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+
 /* 헤더: 블록 배경 & 픽셀 폰트 */
 .global-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #FFFACD;
-  border-bottom: 6px solid #272946;     /* 레트로 픽셀 두께 */
-  box-shadow: 0 2px 0 #FF914D;
   padding: 1.3rem 2rem;
   /* 레트로 박스 느낌 */
 }
@@ -66,6 +87,7 @@ body.dark-mode {
     -2px 2px #000;
 }
 
+
 /* 픽셀 버튼 네비 */
 .category-row {
   display: flex;
@@ -74,10 +96,12 @@ body.dark-mode {
   justify-content: flex-start;
   align-items: center;
 
+
   /* 고정 높이 지정으로 레이아웃 흔들림 방지 */
   height: 48px; /* 버튼 높이 + 마진 감안하여 적절히 조절 */
   box-sizing: border-box;
 }
+
 
 /* 버튼 및 span 동일한 스타일로 맞추기 */
 .category-btn,
@@ -86,6 +110,7 @@ body.dark-mode {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
 
   padding: 0.5em 1.2em;
   border-radius: 0;
@@ -97,12 +122,15 @@ body.dark-mode {
   letter-spacing: 1px;
   box-sizing: border-box;
 
+
   height: 36px;  /* 버튼 내부 높이 고정 */
   min-width: 80px; /* 버튼 너비 최소값 지정 (텍스트 길이 편차 줄임) */
+
 
   box-shadow: 3px 3px 0 #FF2052;
   transition: background 0.12s, color 0.12s, box-shadow 0.12s;
 }
+
 
 /* 활성 버튼 스타일 */
 .category-btn.category-btn--active,
@@ -115,6 +143,7 @@ body.dark-mode {
   user-select: none;
 }
 
+
 /* 호버 효과 */
 .category-btn:hover:not(.category-btn--active),
 .category-btn:focus:not(.category-btn--active) {
@@ -124,6 +153,7 @@ body.dark-mode {
   text-decoration: none;
   outline: none;
 }
+
 
 .social-links {
   display: flex;
@@ -152,4 +182,72 @@ body.dark-mode {
   min-height: 32px;
   display: block;
   color: inherit;
+}
+
+
+/* 다크모드: 포스트 미리보기 타이틀(밝은 네온 초록) & 본문(흰색) */
+body.dark-mode .post-list-item h2,
+body.dark-mode .blog-post header h2,
+body.dark-mode .blog-post h2 {
+  color: #5AFF5A !important;  /* 밝은 네온 초록 */
+}
+body.dark-mode .post-list-item p,
+body.dark-mode .blog-post p,
+body.dark-mode .post-list-item section,
+body.dark-mode .blog-post section {
+  color: #fff !important;      /* 흰색 */
+}
+
+/* 다크모드: 상세 포스트 제목 - 밝은 네온 초록 */
+body.dark-mode .blog-post header h1,
+body.dark-mode .blog-post h1 {
+  color: #5AFF5A !important;
+  /* text-shadow: 2px 2px 0 #243, 0 2px 0 #273; */
+}
+
+.post-list-item p[itemprop="description"] {
+  text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;         /* 3줄까지만 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 4.5em;                 /* 1줄 = line-height(1.5em)이면 3줄 = 4.5em */
+  line-height: 1.5;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.global-wrapper {
+  margin: 0 auto;
+  max-width: 900px;      /* 원하는 값에 맞게 */
+  padding: 0 32px;       /* header, main 모두 일치, 모바일은 16px 등 조정 */
+  box-sizing: border-box;
+}
+
+.global-header > .global-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* post-list-item의 내부 카드가 100% 꽉 차게 */
+.post-list-item {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 필요시 카드 내부 본문은 padding-right: 0; */
+body,
+.blog-post,
+.post-list-item,
+.post-list-item p,
+.blog-post p,
+.blog-post section {
+  font-family: 'Pretendard', 'Spoqa Han Sans Neo', 'Noto Sans KR',
+    'Apple SD Gothic Neo', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.7;
 }
