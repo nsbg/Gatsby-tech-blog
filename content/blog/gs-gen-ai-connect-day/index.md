@@ -1,7 +1,7 @@
 ---
-title: "GS GenAI Connect Day #3: AI 에이전트의 현재와 미래"
+title: "[Event] GS GenAI Connect Day #3: AI 에이전트의 현재와 미래"
 date: "2025-06-05T12:00:00.000+09:00"
-description: This is a custom description for SEO and Open Graph purposes, rather than the default generated excerpt. Simply add a description field to the frontmatter.
+description: "2025. 7. 1 GS그룹 52g 주최 '제3회 GS GenAI Connect Day' 후기"
 category: "Insight"
 ---
 # 1. MCP 정말 안전하게 쓸 수 있을까?
