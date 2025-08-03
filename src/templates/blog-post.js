@@ -10,7 +10,83 @@ const BlogPostTemplate = ({
   location,
 }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
+  const h1Headings = post.headings.filter(heading => heading.depth === 1);
 
+  function slugify(text) {
+    return text
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w\-]+/g, '');
+  }
+
+  return (
+    <Layout location={location} title={siteTitle}>
+      <div style={{ display: "flex" }}>
+        <article
+          className="blog-post"
+          itemScope
+          itemType="http://schema.org/Article"
+          style={{ flex: 1 }}
+        >
+          <header>
+            <h1 itemProp="headline">{post.frontmatter.title}</h1>
+            <p>{post.frontmatter.date}</p>
+          </header>
+          <section
+            dangerouslySetInnerHTML={{ __html: post.html }}
+            itemProp="articleBody"
+          />
+          <hr />
+          <footer>
+            <Bio />
+          </footer>
+        </article>
+
+        {/* 목차 영역 */}
+        <nav
+          className="blog-post-toc"
+          style={{ width: "250px", marginLeft: "2rem", position: "sticky", top: "1rem" }}
+        >
+          <h3>Table of Contents</h3>
+          <ul>
+            {h1Headings.map((heading, index) => (
+              <li key={index}>
+                <a href={`#${slugify(heading.value)}`}>{heading.value}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      {/* 기존 이전/다음 네비게이션은 필요하면 유지하세요 */}
+      <nav className="blog-post-nav">
+        <ul
+          style={{
+            display: `flex`,
+            flexWrap: `wrap`,
+            justifyContent: `space-between`,
+            listStyle: `none`,
+            padding: 0,
+          }}
+        >
+          <li>
+            {previous && (
+              <Link to={previous.fields.slug} rel="prev">
+                ← {previous.frontmatter.title}
+              </Link>
+            )}
+          </li>
+          <li>
+            {next && (
+              <Link to={next.fields.slug} rel="next">
+                {next.frontmatter.title} →
+              </Link>
+            )}
+          </li>
+        </ul>
+      </nav>
+    </Layout>
+  );
   return (
     <Layout location={location} title={siteTitle}>
       <article
@@ -91,6 +167,10 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+      }
+      headings {
+        depth
+        value
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
