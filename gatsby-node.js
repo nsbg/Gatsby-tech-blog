@@ -19,13 +19,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Get all markdown blog posts sorted by date
   const result = await graphql(`
     {
-      allMarkdownRemark(sort: { frontmatter: { date: ASC } }, limit: 1000) {
-        nodes {
-          id
-          fields {
-            slug
+      allMarkdownRemark(
+        sort: { frontmatter: { date: ASC } }, limit: 1000
+        ) {
+          categoryList: distinct(field: frontmatter___category)
+          nodes {
+            id
+            fields {
+              slug
+            }
           }
-        }
       }
     }
   `)
@@ -60,6 +63,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     })
   }
+
+  // Create category pages
+  const categoryPosts = path.resolve(`./src/templates/category-posts.js`)
+
+  // Get the list of categories from the GraphQL query
+  const categories = result.data.allMarkdownRemark.categoryList
+  const slugify = str => str.toLowerCase().replace(/\s+/g, '-');
+  categories.forEach(category => {
+    console.log(`Creating category page for: ${category}`);
+    createPage({
+      path: `/${slugify(category)}/`,
+      component: categoryPosts,
+      context: { category },
+    });
+  });
 }
 
 /**
@@ -116,6 +134,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       title: String
       description: String
       date: Date @dateformat
+      category: String
     }
 
     type Fields {

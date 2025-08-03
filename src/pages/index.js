@@ -8,6 +8,7 @@ import Seo from "../components/seo"
 const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
+  const categories = data.allMarkdownRemark.categoryList
 
   if (posts.length === 0) {
     return (
@@ -24,34 +25,33 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      {/* <Bio /> */}
+      <Seo title="All posts" />
+      <Bio />
+      <nav> {/* 카테고리 Nav */}
+        <ul>
+          {categories.map(category => {
+            const slugify = str => str.toLowerCase().replace(/\s+/g, '-');
+            return (
+              <li key={category}>
+                <Link to={`/${slugify(category)}/`}>{category}</Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
-
           return (
             <li key={post.fields.slug}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
+              <article className="blog-post">
                 <header>
                   <h2>
-                    <Link to={post.fields.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
+                    <Link to={post.fields.slug}>{title}</Link>
                   </h2>
                   <small>{post.frontmatter.date}</small>
                 </header>
-                <section>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: post.frontmatter.description || post.excerpt,
-                    }}
-                    itemProp="description"
-                  />
-                </section>
+                <section dangerouslySetInnerHTML={{ __html: post.excerpt }} />
               </article>
             </li>
           )
@@ -71,21 +71,22 @@ export default BlogIndex
 export const Head = () => <Seo title="All posts" />
 
 export const pageQuery = graphql`
-  {
+  query {
     site {
       siteMetadata {
         title
       }
     }
-    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      categoryList: distinct(field: frontmatter___category)
       nodes {
         excerpt
         fields {
           slug
         }
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
           title
+          date(formatString: "MMMM DD, YYYY")
           description
         }
       }
