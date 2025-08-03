@@ -85,7 +85,7 @@ export default BlogIndex
  *
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
-export const Head = ({ data }) => <Seo title={data.site.siteMetadata.title} />;
+export const Head = ({ data }) => <Seo />;
 
 export const pageQuery = graphql`
   query {
