@@ -71,7 +71,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const categories = result.data.allMarkdownRemark.categoryList
   const slugify = str => str.toLowerCase().replace(/\s+/g, '-');
   categories.forEach(category => {
-    console.log(`Creating category page for: ${category}`);
     createPage({
       path: `/${slugify(category)}/`,
       component: categoryPosts,
