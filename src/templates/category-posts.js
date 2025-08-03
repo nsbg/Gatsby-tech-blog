@@ -7,8 +7,6 @@ import { graphql } from "gatsby";
 const CategoryPost = ({ data, location, pageContext }) => {
   const { category } = pageContext;
   const posts = data.allMarkdownRemark.nodes;
-  console.log('Context category:', pageContext.category);
-  console.log('Posts:', posts);
   // siteTitle은 필요시 상위에서 prop으로 전달하거나, 하드코딩 가능
   return (
     <Layout location={location} title={`Posts in ${category}`}>

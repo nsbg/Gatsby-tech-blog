@@ -27,7 +27,7 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location} title={siteTitle}>
       <Seo title="All posts" />
       <Bio />
-      <nav> {/* 카테고리 Nav */}
+      {/* <nav>
         <ul>
           {categories.map(category => {
             const slugify = str => str.toLowerCase().replace(/\s+/g, '-');
@@ -38,6 +38,29 @@ const BlogIndex = ({ data, location }) => {
             );
           })}
         </ul>
+      </nav> */}
+      <nav>
+        <div className="category-row">
+          <Link
+            to="/"
+            className="category-btn"
+            activeClassName="category-btn--active"
+          >
+            All Posts
+          </Link>
+          {categories.map(category => {
+            const slugify = str => str.toLowerCase().replace(/\s+/g, '-');
+            return (
+              <Link
+                key={category}
+                to={`/${slugify(category)}/`}
+                className="category-btn"
+              >
+                {category}
+              </Link>
+            );
+          })}
+        </div>
       </nav>
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
