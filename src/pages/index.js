@@ -9,7 +9,7 @@ const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
   const categories = data.allMarkdownRemark.categoryList
-
+  const description = post.frontmatter.description;
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
@@ -25,7 +25,7 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <Seo title="All posts" />
+      <Seo />
       <Bio />
       <nav>
         <div className="category-row">
@@ -63,7 +63,12 @@ const BlogIndex = ({ data, location }) => {
                   </h2>
                   <small>{post.frontmatter.date}</small>
                 </header>
-                <section dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+                <section>
+                  {description
+                    ? <p>{description}</p>
+                    : <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+                  }
+                </section>
               </article>
             </li>
           )
@@ -80,7 +85,7 @@ export default BlogIndex
  *
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
-export const Head = () => <Seo title="All posts" />
+export const Head = () => <Seo />
 
 export const pageQuery = graphql`
   query {
