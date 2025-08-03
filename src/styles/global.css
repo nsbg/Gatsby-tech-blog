@@ -160,6 +160,7 @@ body.dark-mode .global-header {
   align-items: center;
   padding-right: 0.3em;
 }
+
 .social-link, .icon-btn, .theme-icon-btn {
   background: #2E294E;
   border: 2px solid #FFD600;
@@ -174,6 +175,7 @@ body.dark-mode .global-header {
   cursor: pointer;
   transition: background .18s, color .18s;
 }
+
 .social-icon {
   width: 32px;
   height: 32px;

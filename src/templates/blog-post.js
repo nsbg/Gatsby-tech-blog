@@ -45,7 +45,7 @@ const BlogPostTemplate = ({
         {/* 목차 영역 */}
         <nav
           className="blog-post-toc"
-          style={{ width: "250px", marginLeft: "2rem", position: "sticky", top: "1rem" }}
+          style={{ width: "250px", marginLeft: "2rem", position: "fixed", top: "1rem" }}
         >
           <h3>Table of Contents</h3>
           <ul>
