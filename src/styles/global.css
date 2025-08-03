@@ -52,8 +52,7 @@ body.dark-mode .global-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.3rem 2rem;
-  /* 레트로 박스 느낌 */
+  padding: 2.2rem 2rem 1.3rem 2rem; /* 위 2.2rem, 좌우 2rem, 아래 1.3rem */
 }
 .main-heading {
   font-size: 1.1rem;
@@ -250,4 +249,40 @@ body,
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.7;
+}
+
+.bio,
+.bio * {
+  font-family: 'Press Start 2P', 'Pretendard', monospace !important;
+  font-size: 0.92rem;
+  letter-spacing: 1.2px;
+  color: #FFD600;
+  /* text-shadow:
+    2px 2px #FFD600,
+    0 2px #2D1A05; */
+}
+
+.bio-info {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  color: #FFF;
+  margin-top: 0.25em;
+  opacity: 0.94;
+  letter-spacing: 1px;
+}
+
+body.dark-mode .blog-post header h1,
+body.dark-mode .blog-post h1,
+body.dark-mode .blog-post h2,
+body.dark-mode .blog-post header h2,
+body.dark-mode .blog-post h3,
+body.dark-mode .blog-post header h3,
+body.dark-mode .blog-post h4,
+body.dark-mode .blog-post header h4,
+body.dark-mode .blog-post h5,
+body.dark-mode .blog-post header h5,
+body.dark-mode .blog-post h6,
+body.dark-mode .blog-post header h6 {
+  color: #5AFF5A !important;
+  text-shadow: 1px 1px 0 #243, 0 1px 0 #273;
 }

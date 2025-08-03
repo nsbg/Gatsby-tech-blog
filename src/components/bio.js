@@ -42,15 +42,21 @@ const Bio = () => {
         quality={95}
         alt="Profile picture"
       />
-      {author?.name && (
+      {/* {author?.name && (
         <p>
           <strong>{author.name}</strong> {author?.summary || null}
-          {` `}
-          {/* <a href={`https://twitter.com/${social?.twitter || ``}`}>
-            You should follow them on Twitter
-          </a> */}
+          <br/>
+          Keep learning
         </p>
-      )}
+      )} */}
+      <div className="bio-meta">
+        <div className="bio-name">
+          <strong>{author.name}</strong>
+        </div>
+        <div className="bio-info">
+          Keep learning
+        </div>
+      </div>
     </div>
   )
 }
