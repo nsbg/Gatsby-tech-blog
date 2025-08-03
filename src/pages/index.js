@@ -9,7 +9,6 @@ const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
   const categories = data.allMarkdownRemark.categoryList
-  const description = post.frontmatter.description;
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
@@ -54,6 +53,7 @@ const BlogIndex = ({ data, location }) => {
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug
+          const description = post.frontmatter.description;
           return (
             <li key={post.fields.slug}>
               <article className="blog-post">

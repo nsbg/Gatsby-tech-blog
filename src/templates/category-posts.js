@@ -9,7 +9,6 @@ const CategoryPost = ({ data, location, pageContext }) => {
   const { category } = pageContext;
   const siteTitle = data.site.siteMetadata.title;
   const posts = data.allMarkdownRemark.nodes;
-  const description = post.frontmatter.description;
   return (
     <Layout location={location} title={siteTitle}>
       <Bio />
@@ -26,6 +25,7 @@ const CategoryPost = ({ data, location, pageContext }) => {
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug;
+          const description = post.frontmatter.description;
           return (
             <li key={post.fields.slug}>
               <article className="blog-post">
