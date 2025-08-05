@@ -5,6 +5,17 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
+function handleClick(e, id) {
+  e.preventDefault();  // 기본 앵커 동작 방지
+  const element = document.getElementById(id);
+  if (element) {
+    const yOffset = -70; // 헤더 고정 높이만큼 보정, 필요 없으면 0으로
+    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+    window.history.pushState(null, null, `#${id}`); // 주소창 해시 업데이트
+  }
+}
+
 const BlogPostTemplate = ({
   data: { previous, next, site, markdownRemark: post },
   location,
@@ -65,13 +76,19 @@ const BlogPostTemplate = ({
               width: '300px',
             }}
           >
-            <h3>Table of Contents</h3>
+            <h4>📌 Table of Contents</h4>
+    
             <ul>
-              {h1Headings.map((heading, idx) => (
-                <li key={idx}>
-                  <a href={`#${slugify(heading.value)}`}>{heading.value}</a>
-                </li>
-              ))}
+              {h1Headings.map((heading, idx) => {
+                const slug = slugify(heading.value);
+                return (
+                  <li key={idx}>
+                    <a href={`#${slug}`} onClick={(e) => handleClick(e, slug)}>
+                      {heading.value}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         </aside>
