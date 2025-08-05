@@ -221,7 +221,7 @@ body.dark-mode .blog-post h1 {
 
 .global-wrapper {
   margin: 0 auto;
-  max-width: 900px;      /* 원하는 값에 맞게 */
+  max-width: 1280px;      /* 원하는 값에 맞게 */
   padding: 0 32px;       /* header, main 모두 일치, 모바일은 16px 등 조정 */
   box-sizing: border-box;
 }
@@ -287,4 +287,18 @@ body.dark-mode .blog-post h6,
 body.dark-mode .blog-post header h6 {
   color: #5AFF5A !important;
   text-shadow: 1px 1px 0 #243, 0 1px 0 #273;
+}
+
+.blog-post {
+  max-width: 1200px !important;
+}
+
+.blog-post-toc a {
+  text-decoration: none;         /* 기본은 밑줄 없음 */
+  color: inherit;                /* 기존 텍스트 컬러 유지, 필요없으면 빼도 됨 */
+  transition: text-decoration 0.2s;
+}
+
+.blog-post-toc a:hover {
+  text-decoration: underline;    /* hover 시 밑줄 표시 */
 }

@@ -10,26 +10,29 @@ const BlogPostTemplate = ({
   location,
 }) => {
   const siteTitle = site.siteMetadata?.title || `Title`
-  const h1Headings = post.headings.filter(heading => heading.depth === 1);
+  const h1Headings = post.headings.filter(heading => heading.depth === 1)
 
   function slugify(text) {
     return text
       .toLowerCase()
       .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '');
+      .replace(/[^\w\-]+/g, '')
   }
 
   return (
     <Layout location={location} title={siteTitle}>
-      <div style={{ display: "flex" }}>
+      {/* 전체 가로 레이아웃: 본문 + 사이드바 */}
+      <div style={{ display: "flex", alignItems: "flex-start", margin: '0 auto', padding: '20px' }}>
+        
+        {/* 본문 영역 */}
         <article
           className="blog-post"
           itemScope
           itemType="http://schema.org/Article"
-          style={{ flex: 1 }}
+          style={{ flex: 1, minWidth: 0, maxWidth: '800px'}}
         >
           <header>
-            <h2 itemProp="headline">{post.frontmatter.title}</h2>
+            <h1 itemProp="headline">{post.frontmatter.title}</h1>
             <p>{post.frontmatter.date}</p>
           </header>
           <section
@@ -42,71 +45,39 @@ const BlogPostTemplate = ({
           </footer>
         </article>
 
-        {/* 목차 영역 */}
-        <nav
-          className="blog-post-toc"
-          style={{ width: "250px", marginLeft: "2rem", position: "fixed", top: "1rem" }}
-        >
-          <h3>Table of Contents</h3>
-          <ul>
-            {h1Headings.map((heading, index) => (
-              <li key={index}>
-                <a href={`#${slugify(heading.value)}`}>{heading.value}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
-
-      {/* 기존 이전/다음 네비게이션은 필요하면 유지하세요 */}
-      <nav className="blog-post-nav">
-        <ul
+        {/* 오른쪽 목차 사이드바 */}
+        <aside
           style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
+            width: '300px',
+            marginLeft: '40px'
           }}
         >
-          <li>
-            {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </nav>
-    </Layout>
-  );
-  return (
-    <Layout location={location} title={siteTitle}>
-      <article
-        className="blog-post"
-        itemScope
-        itemType="http://schema.org/Article"
-      >
-        <header>
-          <h1 itemProp="headline">{post.frontmatter.title}</h1>
-          <p>{post.frontmatter.date}</p>
-        </header>
-        <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
-          itemProp="articleBody"
-        />
-        <hr />
-        <footer>
-          <Bio />
-        </footer>
-      </article>
+          <nav
+            className="blog-post-toc"
+            style={{
+              position: 'sticky',
+              top: '2rem',           // 헤더 높이 고려해서 조정
+              background: '#fffbe2', // 배경 노란색으로 강조 가능
+              borderRadius: '12px',  // 둥근 모서리,
+              flexShrink: 0, // 사이드바 고정
+              boxShadow: '0 1px 8px #dcc',
+              padding: '18px 18px',
+              width: '300px',
+            }}
+          >
+            <h3>Table of Contents</h3>
+            <ul>
+              {h1Headings.map((heading, idx) => (
+                <li key={idx}>
+                  <a href={`#${slugify(heading.value)}`}>{heading.value}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      </div>
+
+      {/* 이전/다음 글 네비게이션 */}
       <nav className="blog-post-nav">
         <ul
           style={{
