@@ -108,28 +108,49 @@ def solution(genres, plays):
 sorted_data[genre] = sorted(plays, key=lambda x: (-x[1], x[0]))
 ```
 
+   
 > 2. **상위 2개 노래 선택 로직 간소화**
 
-앨범에 수록할 노래를 선택하는 아래의 코드는 try-except 구문을 사용하여 장르에 노래가 하나만 있을 경우 발생하는 IndexError를 처리하고 있습니다.
-code
-Python
-for i in range(2):
-    try:
-        answer.append(sorted_data[genre][i][0])
-    except:
-        break
-이 방법도 작동하지만, 더 간결하고 파이썬스러운 방법이 있습니다.
-개선 아이디어:
-리스트 슬라이싱(slicing)을 활용해보세요. my_list[:2]는 리스트의 처음부터 최대 2개의 요소를 가져옵니다. 만약 리스트에 요소가 하나뿐이라면, 그 하나만 가져오므로 try-except가 필요 없어집니다.
-3. 데이터 구조의 통합
-현재 코드는 장르별 노래 목록을 담는 genre_dict와 장르별 총 재생 수를 담는 genre_play라는 두 개의 딕셔너리를 만들어 사용하고 있습니다. 이후에 sorted_data라는 세 번째 딕셔너리도 생성합니다.
-개선 아이디어:
-초기 데이터 처리 단계에서 이 정보들을 하나의 데이터 구조로 통합하여 관리하면 변수의 수를 줄이고 코드의 흐름을 더 명확하게 만들 수 있습니다. 예를 들어, 다음과 같은 구조를 생각해볼 수 있습니다.
-code
-Code
-{
-    'pop': {'total_plays': 3100, 'songs': [(4, 2500), (1, 600)]},
-    'classic': {'total_plays': 1450, 'songs': [(3, 800), (0, 500), (2, 150)]}
-}
-이러한 구조를 처음부터 만들어두면 나중에 장르를 정렬할 때와 노래를 선택할 때 조금 더 편리하게 데이터를 다룰 수 있습니다. collections 모듈의 defaultdict를 사용하면 이 과정을 더 쉽게 구현할 수도 있습니다.
-요약
+이건 gemini의 제안을 보자마자 '왜 리스트 슬라이싱 생각을 못했지?' 싶었다. 처음에 try-except문 없이 코드 짜고 이건 무조건 '한 장르에 한 곡 밖에 없는 TC에서 무조건 에러 나겠는데' 싶긴 했지만 런타임 에러 뜨는 케이스 보자마자 바로 예외처리 형식으로 수정했다.
+
+수정하면서도 마음에 들지는 않았는데 저것 말고는 떠오르는 방식이 없었다.
+
+리스트 슬라이싱이 엄청 고급 스킬도 아닌데 떠올리지 못했다는 게 너무 아쉬웠다. 알아서 가져올 수 있는 만큼만 가져오기 때문에 인덱스 에러를 만나지 않는다는 게 리스트 슬라이싱의 큰 장점이다.
+
+```python
+for genre, _ in sorted(genre_play.items(), key=lambda x: -x[1]):
+    top_two_songs = sorted_data[genre][:2]
+    
+    for song in top_two_songs:
+        answer.append(song[0])
+```
+
+
+> **3. 딕셔너리 최적화**
+
+회사에서 일할 때 중첩 구조 딕셔너리 많이 쓰면서 아예 키 하나에 많은 값 저장할 생각을 못했다니 코테 문제를 오랜만에 봐서 그런 거라고 자기 최면을 거는 중이다. ~~이런 실수는 두 번 다시 없다~~
+
+## 수정된 코드
+```python
+def solution(genres, plays):
+    answer = []
+    album_data = {}
+
+    for i, (genre, play) in enumerate(zip(genres, plays)):
+        if genre not in album_data:
+            album_data[genre] = {'total_plays': 0, 'songs': []}
+        
+        album_data[genre]['total_plays'] += play
+        album_data[genre]['songs'].append((i, play))
+        
+    sorted_genres_by_play = sorted(album_data.items(), key=lambda item: item[1]['total_plays'], reverse=True)
+
+    for genre_name, genre_info in sorted_genres_by_play:
+        songs_list = genre_info['songs']
+        songs_list.sort(key=lambda song: (-song[1], song[0]))
+
+        for song in songs_list[:2]:
+            answer.append(song[0])
+            
+    return answer
+```
