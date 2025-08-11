@@ -51,6 +51,13 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
+          {
+            resolve: `gatsby-remark-highlight-code`,
+            options: {
+              terminal: "carbon", // carbon 스타일은 맥북 창 느낌!
+              theme: "dracula" // 원하는 테마로 변경 가능
+            }
+          },
           `gatsby-remark-prismjs`,
         ],
       },

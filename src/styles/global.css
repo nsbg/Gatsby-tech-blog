@@ -302,3 +302,10 @@ body.dark-mode .blog-post header h6 {
 .blog-post-toc a:hover {
   text-decoration: underline;    /* hover 시 밑줄 표시 */
 }
+
+/* 모든 숫자(ol), 점(ul) 리스트 공통 적용 */
+ol, ul {
+  margin-left: 1.5em;     /* 적당한 들여쓰기 */
+  padding-left: 1.5em;
+  list-style-position: outside;
+}

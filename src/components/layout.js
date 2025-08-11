@@ -1,6 +1,9 @@
 import * as React from "react"
 import { Link } from "gatsby"
 import ThemeToggle from "./theme/theme-toggle"
+import { defineCustomElements as deckDeckGoHighlightElement } from "@deckdeckgo/highlight-code/dist/loader";
+
+deckDeckGoHighlightElement();
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
