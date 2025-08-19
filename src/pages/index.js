@@ -9,6 +9,7 @@ const BlogIndex = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
   const categories = data.allMarkdownRemark.categoryList
+
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
@@ -22,70 +23,61 @@ const BlogIndex = ({ data, location }) => {
     )
   }
 
+  // 문자열을 slug 형태로 변환하는 함수
+  const slugify = (str) => str.toLowerCase().replace(/\s+/g, '-')
+
   return (
     <Layout location={location} title={siteTitle}>
       <Seo />
-      <Bio />
-      <nav>
-        <div className="category-row">
-          <Link
-            to="/"
-            className="category-btn"
-            activeClassName="category-btn--active"
-          >
-            All Posts
-          </Link>
-          {categories.map(category => {
-            const slugify = (str) => str.toLowerCase().replace(/\s+/g, '-')
+      <div className="blog-index-wrapper">
+        {/* 큰 제목 */}
+        <h1 className="blog-main-title">All posts</h1>
+
+        {/* 카테고리 내비게이션 */}
+        <nav className="blog-category-nav">
+          {categories.map(category => (
+            <Link
+              key={category}
+              to={`/${slugify(category)}/`}
+              className="category-btn"
+              activeClassName="category-btn--active"
+            >
+              {category}
+            </Link>
+          ))}
+        </nav>
+
+        {/* 카드 그리드로 글 리스트 출력 */}
+        <div className="blog-card-grid">
+          {posts.map(post => {
+            const title = post.frontmatter.title || post.fields.slug
             return (
-              <Link
-                key={category}
-                to={`/${slugify(category)}/`}
-                className="category-btn"
-                activeClassName="category-btn--active"
-              >
-                {category}
+              <Link to={post.fields.slug} key={post.fields.slug} className="blog-card">
+                {post.frontmatter.thumbnail && (
+                  <img
+                    src={post.frontmatter.thumbnail}
+                    alt={title}
+                    className="blog-card-thumb"
+                  />
+                )}
+                <div className="blog-card-title">{title}</div>
+                <div className="blog-card-summary">
+                  {post.frontmatter.description
+                    ? post.frontmatter.description
+                    : post.excerpt}
+                </div>
               </Link>
             )
           })}
         </div>
-      </nav>
-      <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
-          const title = post.frontmatter.title || post.fields.slug
-          const description = post.frontmatter.description;
-          return (
-            <li key={post.fields.slug}>
-              <article className="blog-post">
-                <header>
-                  <h2>
-                    <Link to={post.fields.slug}>{title}</Link>
-                  </h2>
-                  <small>{post.frontmatter.date}</small>
-                </header>
-                <section>
-                  {description
-                    ? <p>{description}</p>
-                    : <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
-                  }
-                </section>
-              </article>
-            </li>
-          )
-        })}
-      </ol>
+      </div>
     </Layout>
   )
 }
 
 export default BlogIndex
 
-/**
- * Head export to define metadata for the page
- *
- * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
- */
-export const Head = ({ data }) => <Seo />;
+export const Head = () => <Seo />
 
 export const pageQuery = graphql`
   query {
@@ -105,6 +97,7 @@ export const pageQuery = graphql`
           title
           date(formatString: "MMMM DD, YYYY")
           description
+          category
         }
       }
     }
