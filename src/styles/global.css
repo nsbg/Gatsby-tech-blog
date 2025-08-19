@@ -314,6 +314,11 @@ body, .global-wrapper {
   background: #f6f8fe;
 }
 
+.preview-card:hover {
+  box-shadow: 0 4px 28px rgba(67,104,171,.19);
+  background: #f6f8fe;
+}
+
 /* 반응형: 모바일 레이아웃에서는 1~2칸 */
 @media (max-width: 1040px) {
   .blog-card-grid { grid-template-columns: repeat(2, 1fr); }

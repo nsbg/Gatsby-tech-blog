@@ -62,7 +62,7 @@ const BlogPostTemplate = ({
               </nav>
             </footer>
           </article>
-          {/* 사이드 목차 카드 */}
+          {/* 
           <aside className="sidebar-toc">
             <nav className="blog-post-toc">
               <h4 className="toc-title">📌 Table of Contents</h4>
@@ -77,6 +77,7 @@ const BlogPostTemplate = ({
               </ul>
             </nav>
           </aside>
+          */}
         </div>
       </div>
     </Layout>
