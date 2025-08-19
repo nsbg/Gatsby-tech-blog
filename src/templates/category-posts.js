@@ -17,27 +17,30 @@ const CategoryPost = ({ data, location, pageContext }) => {
       {/* 상단 제목 */}
       <h1 className="blog-main-title">{category || "All posts"}</h1>
 
-      <ol style={{ listStyle: `none` }}>
+      <ol style={{ listStyle: "none" }}>
         {posts.map(post => {
+          // 이미지, 타이틀, 설명 등
           const title = post.frontmatter.title || post.fields.slug;
           const description = post.frontmatter.description;
+          const thumbnail = post.frontmatter.thumbnail; // 이미지 path
+          
           return (
             <li key={post.fields.slug}>
-              <article className="blog-post">
-                <header>
-                  <h2>
-                    <Link to={post.fields.slug}>{title}</Link>
-                  </h2>
-                  <small>{post.frontmatter.date}</small>
-                </header>
-                <section>
-                  {description ? (
-                    <p>{description}</p>
+              <Link to={post.fields.slug} className="preview-card">
+                <div className="preview-thumb-wrapper">
+                  {thumbnail ? (
+                    <img src={thumbnail} alt={title} className="preview-thumb" />
                   ) : (
-                    <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+                    <div className="preview-thumb preview-thumb--placeholder"></div>
                   )}
-                </section>
-              </article>
+                </div>
+                <div className="preview-text">
+                  <h2 className="preview-title">{title}</h2>
+                  <div className="preview-desc">
+                    {description || <span dangerouslySetInnerHTML={{ __html: post.excerpt }} />}
+                  </div>
+                </div>
+              </Link>
             </li>
           );
         })}

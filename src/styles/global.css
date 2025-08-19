@@ -165,6 +165,13 @@ body, .global-wrapper {
   box-sizing: border-box;
 }
 
+.global-main {
+  min-width: 900px;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-bottom: 90px;
+}
+
 .post-container {
   background: #fff;
   max-width: 850px;
@@ -235,28 +242,39 @@ body, .global-wrapper {
 
 .blog-card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);   /* 3열 예시, 반응형이면 media query로 변경 */
   gap: 45px;
-  margin-bottom: 90px;
   justify-content: center;
   align-items: stretch;
 }
 
 .blog-card {
   background: #fff;
-  border-radius: 18px;
   box-shadow: 0 2px 16px rgba(67,104,171,.09);
-  padding: 18px 18px 20px 18px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-decoration: none;
   color: #222;
   transition: box-shadow .14s;
-  min-width: 260px;
-  max-width: 390px;
+  min-width: 350px;
+  max-width: 350px;             
+  min-height: 260px;
+  max-height: 260px;              /* 정사각형 높이 */
+  box-sizing: border-box;
+  justify-content: flex-start;
 }
 
+.blog-card-grid, .category-posts-list {
+  width: 100%;              /* 부모(.blog-index-wrapper) 최대폭에 맞춤 */
+  max-width: 830px;         /* 헤더 검색바와 똑같이! */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 필요시 조정 */
+  gap: 38px;
+  justify-items: center;    /* 아이템도 가운데 */
+}
 .blog-card-thumb {
   width: 100%;
   min-height: 140px;
@@ -266,17 +284,29 @@ body, .global-wrapper {
 }
 
 .blog-card-title {
-  font-size: 1.18rem;
+  font-size: 1.11rem;
   font-weight: 700;
   color: #2563FF;
-  margin-bottom: 8px;
-  margin-top: 6px;
+  margin-bottom: 10px;
+  margin-top: 2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;       /* 최대 2줄 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 .blog-card-summary {
   font-size: 1rem;
   color: #454545;
   margin-top: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;       /* 최대 2줄 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 .blog-card:hover {
@@ -284,18 +314,21 @@ body, .global-wrapper {
   background: #f6f8fe;
 }
 
+/* 반응형: 모바일 레이아웃에서는 1~2칸 */
 @media (max-width: 1040px) {
-  .blog-card-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .blog-card-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 700px) {
   .blog-main-title {
     font-size: 2rem;
   }
-  .blog-card-grid {
-    grid-template-columns: 1fr;
+  .blog-card-grid { grid-template-columns: 1fr; }
+  .blog-card {
+    min-width: 92vw;
+    max-width: 92vw;
+    min-height: 200px;
+    max-height: 220px;
   }
 }
 
@@ -305,7 +338,7 @@ body, .global-wrapper {
   overflow: hidden;
   width: 100%;
   margin-bottom: 32px;
-  padding: 56px 48px;
+  padding: 48px 48px;
 }
 
 .sidebar-toc {
@@ -427,7 +460,6 @@ body, .global-wrapper {
   }
   .blog-post {
     padding: 36px 14px;
-    border-radius: 14px;
   }
 }
 
@@ -731,3 +763,62 @@ body, .global-wrapper {
   .search-header-socials { gap: 11px; }
 }
 
+.preview-card {
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  box-shadow: 0 2px 16px rgba(67, 104, 171, .09);
+  margin-bottom: 38px;
+  text-decoration: none;
+  color: #2058E0;
+  transition: box-shadow .14s;
+  overflow: hidden;
+}
+
+.preview-thumb-wrapper {
+  width: 38%;
+  min-width: 160px;
+  max-width: 320px;
+  background: #f9efd4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-thumb {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.preview-thumb--placeholder {
+  width: 100%;
+  height: 120px;
+  background: #f7e3a1;
+}
+
+.preview-text {
+  flex: 1;
+  padding: 0 28px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.preview-title {
+  font-size: 1.34rem;
+  font-weight: 700;
+  color: #2563FF;
+  margin-bottom: 14px;
+  margin-top: 32px;
+  -webkit-line-clamp: 2;       /* 최대 2줄 */
+
+  -webkit-box-orient: vertical;
+}
+
+.preview-desc {
+  font-size: 1.07rem;
+  color: #2058E0;
+}
