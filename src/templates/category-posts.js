@@ -1,27 +1,22 @@
-import Seo from "../components/seo";
-import Bio from "../components/bio";
+import React from "react";
 import { Link } from "gatsby";
-import * as React from "react";
 import Layout from "../components/layout";
+import Bio from "../components/bio";
 import { graphql } from "gatsby";
 
 const CategoryPost = ({ data, location, pageContext }) => {
   const { category } = pageContext;
   const siteTitle = data.site.siteMetadata.title;
   const posts = data.allMarkdownRemark.nodes;
+
+  // 카테고리 목록, 메인에서 All Posts 포함
+  const categories = ["All Posts", "Insight", "PS", "Paper"];
+
   return (
     <Layout location={location} title={siteTitle}>
-      <Bio />
-      <nav>
-        <div className="category-row">
-          <Link to="/" className="category-btn">
-            All Posts
-          </Link>
-          <span className="category-btn category-btn--active">
-            {category}
-          </span>
-        </div>
-      </nav>
+      {/* 상단 제목 */}
+      <h1 className="blog-main-title">{category || "All posts"}</h1>
+
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.frontmatter.title || post.fields.slug;
@@ -36,10 +31,11 @@ const CategoryPost = ({ data, location, pageContext }) => {
                   <small>{post.frontmatter.date}</small>
                 </header>
                 <section>
-                  {description
-                    ? <p>{description}</p>
-                    : <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
-                  }
+                  {description ? (
+                    <p>{description}</p>
+                  ) : (
+                    <div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+                  )}
                 </section>
               </article>
             </li>
@@ -52,7 +48,6 @@ const CategoryPost = ({ data, location, pageContext }) => {
 
 export default CategoryPost;
 
-// 쿼리에서 siteMetadata의 title도 함께 요청!
 export const pageQuery = graphql`
   query($category: String!) {
     site {
@@ -77,4 +72,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`
