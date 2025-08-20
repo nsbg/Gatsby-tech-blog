@@ -66,18 +66,14 @@ const BlogPostTemplate = ({
         {/* TOC는 흰 박스 바깥 노란 영역에 위치 */}
         <aside className="sidebar-toc-fixed"
           style={{
-            position: 'absolute',
             top: 0,
             left: 'calc(50% + 400px)', // 800px/2 + offset
-            marginLeft: '36px',
+            marginLeft: '24px',
             width: '280px',
             minHeight: '160px',
             boxSizing: 'border-box',
-            background: '#FFF8D1',
-            borderRadius: '20px',
-            border: '1.5px solid #F6EFB5',
-            boxShadow: '0 2px 14px 0 rgba(200,180,120,.09)',
-            padding: '26px 18px 22px 22px',
+            background: 'transparent',
+            padding: '26px 18px 10px 10px',
             zIndex: 2,
           }}
         >
