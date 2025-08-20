@@ -20,9 +20,9 @@ const BlogPostTemplate = ({
 
   return (
     <Layout location={location} title={siteTitle}>
-      <div className="post-outer-wrapper">
-        <div className="post-content-layout">
-          {/* 본문 카드 */}
+      <div className="post-outer-wrapper" style={{ position: 'relative', maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
+        {/* 본문 박스만큼만 max-width! */}
+        <div className="post-main-area" style={{ maxWidth: '800px', margin: '0 auto' }}>
           <article
             className="blog-post"
             itemScope
@@ -62,23 +62,38 @@ const BlogPostTemplate = ({
               </nav>
             </footer>
           </article>
-          {/* 
-          <aside className="sidebar-toc">
-            <nav className="blog-post-toc">
-              <h4 className="toc-title">📌 Table of Contents</h4>
-              <ul>
-                {h1Headings.map((heading, idx) => (
-                  <li key={idx}>
-                    <a href={`#${heading.id}`}>
-                      {heading.value}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
-          */}
         </div>
+        {/* TOC는 흰 박스 바깥 노란 영역에 위치 */}
+        <aside className="sidebar-toc-fixed"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 'calc(50% + 400px)', // 800px/2 + offset
+            marginLeft: '36px',
+            width: '280px',
+            minHeight: '160px',
+            boxSizing: 'border-box',
+            background: '#FFF8D1',
+            borderRadius: '20px',
+            border: '1.5px solid #F6EFB5',
+            boxShadow: '0 2px 14px 0 rgba(200,180,120,.09)',
+            padding: '26px 18px 22px 22px',
+            zIndex: 2,
+          }}
+        >
+          <nav className="sidebar-toc">
+            <h4 className="toc-title">📌 Table of Contents</h4>
+            <ul>
+              {h1Headings.map((heading, idx) => (
+                <li key={idx}>
+                  <a href={`#${heading.id}`}>
+                    {heading.value}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
       </div>
     </Layout>
   )

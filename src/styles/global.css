@@ -827,3 +827,36 @@ body, .global-wrapper {
   font-size: 1.07rem;
   color: #2058E0;
 }
+
+.post-outer-wrapper {
+  max-width: 1200px;         /* 본문+TOC 전체 컨테이너 */
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+}
+
+.post-main-area {
+  max-width: 800px;          /* 흰색 카드 너비 고정! */
+  margin: 0 auto;
+}
+
+.sidebar-toc-fixed {
+  position: absolute;        /* 포스트 wrapper 기준으로 위치 */
+  top: 0;
+  left: 100%;                /* 포스트 카드의 오른편 바깥부터 시작 */
+  margin-left: 36px;         /* 노란 배경 위에 띄우는 여백 */
+  width: 280px;              /* TOC 너비 */
+  min-height: 160px;
+  box-sizing: border-box;
+  background: #FFF8D1;
+  border-radius: 20px;
+  border: 1.5px solid #F6EFB5;
+  box-shadow: 0 2px 14px 0 rgba(200,180,120, .09);
+  padding: 26px 18px 22px 22px;
+}
+
+@media (max-width: 1200px) {
+  .sidebar-toc-fixed {
+    display: none;           /* 작은 화면에선 TOC 우측 고정 숨김 */
+  }
+}
