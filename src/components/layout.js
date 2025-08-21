@@ -79,7 +79,7 @@ const Layout = ({ location, title, children }) => {
           <span className="footer-title">Gold Vibes Only</span>
         </div>
         <div className="footer-links-row">
-          {/* Footer content if needed */}
+          © 2025 Bogeum Kim All rights reserved.
         </div>
       </footer>
     </div>
