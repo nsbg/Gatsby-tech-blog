@@ -9,7 +9,7 @@ const BlogHeaderTyping = () => {
   // 타이핑 애니메이션 구현
   const ref = React.useRef();
   React.useEffect(() => {
-    const title = "Gold vibes only";
+    const title = "Gold Vibes Only";
     let i = 0;
     const timer = setInterval(() => {
       if (ref.current) {
