@@ -11,7 +11,7 @@ category: "Contribution"
 hf에서 원하는 방향: 사용자가 활성화했을 때만 쓸 수 있게 클래스로 따로 빼는 것
 
 ### Benjamin guide (1)
-![benjamin 1](./img/kasa1.jpg)
+![benjamin 1](./img/b1.jpg)
 
 이 단계 작업하다가 어떤 파일을 어떻게 수정해야하는지 아예 감을 못 잡음
 
