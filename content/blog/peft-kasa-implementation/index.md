@@ -35,3 +35,26 @@ hf에서 원하는 방향: 사용자가 활성화했을 때만 쓸 수 있게 �
 - lora/layer.py에 self.use_kasa 속성을 추가해놨는데 이건 필요없음
 
     - self.use_dora는 과거 코드와 호환성을 유지하려고 있는 것뿐임
+
+- lora/layer.py는 아래처럼 수정하면 됨
+```Python
+  def resolve_lora_variant(self, *, use_dora: bool, use_kasa: bool, **kwargs) -> Optional[LoraVariant]:
+        if use_dora and use_kasa:
+            raise ValueError("Cannot use DoRA and KaSA at the same time, please choose only one.")
+
+        variant = None
+        if use_dora:
+            from .variants import DoraLinearVariant
+
+            variant = DoraLinearVariant()
+        elif use_kasa:
+            ...
+
+        return variant
+```
+    
+💭 코드블럭까지 추가해서 설명해주는 메인테이너에게 감동 안 받을 사람 없다고 본다 진짜로
+
+- 위랑 비슷한 방식으로 다른 LoRA 레이어들의 resolve_lora_variant 메서드도 KaSA와 함께 작동하는지 여부에 따라 업데이트 필요(KaSA가 Conv2d 등과 함께 작동하는지는 확실하지 않음)
+
+💭 내가 왜 손을 못 대고 있었을까? → 어떤 게 LoRA 레이어인지 모르는 상태로 코드부터 고치려고 했기 때문인 듯
