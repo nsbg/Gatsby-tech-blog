@@ -10,7 +10,7 @@ category: "Contribution"
 
 hf에서 원하는 방향: 사용자가 활성화했을 때만 쓸 수 있게 클래스로 따로 빼는 것
 
-### Benjamin guide (1)
+## Benjamin guide (1)
 ![benjamin 1](./img/b1.png)
 
 이 단계 작업하다가 어떤 파일을 어떻게 수정해야하는지 아예 감을 못 잡음
@@ -18,7 +18,7 @@ hf에서 원하는 방향: 사용자가 활성화했을 때만 쓸 수 있게 �
 그래서 질문 남김
 ![me 1](./img/m1.png)
 
-### Benjamin guide (2)
+## Benjamin guide (2)
 그는 천사였음
 
 ![benjamin 2-1](./img/b2-1.png)
@@ -37,6 +37,7 @@ hf에서 원하는 방향: 사용자가 활성화했을 때만 쓸 수 있게 �
     - self.use_dora는 과거 코드와 호환성을 유지하려고 있는 것뿐임
 
 - lora/layer.py는 아래처럼 수정하면 됨
+
 ```python
 def resolve_lora_variant(self, *, use_dora: bool, use_kasa: bool, **kwargs) -> Optional[LoraVariant]:
     if use_dora and use_kasa:
@@ -58,3 +59,14 @@ def resolve_lora_variant(self, *, use_dora: bool, use_kasa: bool, **kwargs) -> O
 - 위랑 비슷한 방식으로 다른 LoRA 레이어들의 resolve_lora_variant 메서드도 KaSA와 함께 작동하는지 여부에 따라 업데이트 필요(KaSA가 Conv2d 등과 함께 작동하는지는 확실하지 않음)
 
 💭 내가 왜 손을 못 대고 있었을까? → 어떤 게 LoRA 레이어인지 모르는 상태로 코드부터 고치려고 했기 때문인 듯
+
+### DoraLinearVariant 클래스 분석
+DoraLinearVariant 클래스를 한 번 다시 보자.
+
+- LoraVariant를 상속받음
+
+- init, merge_safe, merge_unsafe, unmerge
+
+    - 다 static 메서드
+        
+        - @staticemethod 데코레이터를 사용하는 함수는 self 매개변수를 사용하지 않음
