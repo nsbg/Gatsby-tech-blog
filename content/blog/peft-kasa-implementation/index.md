@@ -69,4 +69,4 @@ DoraLinearVariant 클래스를 한 번 다시 보자.
 
     - 다 static 메서드
         
-        - @staticemethod 데코레이터를 사용하는 함수는 self 매개변수를 사용하지 않음
+        - @staticmethod 데코레이터를 사용하는 함수는 self 매개변수를 사용하지 않음
